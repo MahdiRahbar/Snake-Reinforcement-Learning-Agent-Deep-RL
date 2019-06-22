@@ -70,3 +70,16 @@ class Game(object):
         image = pygame.surfarray.array3d(pygame.display.get_surface())
         time.sleep(1 / 10)
         return image, reward, True
+        
+    def direction_snake(self, actions):
+        action = actions
+        if action == 2 and self.dirs != 0:
+            self.dirs = 2
+        elif action == 0 and self.dirs != 2:
+            self.dirs = 0
+        elif action == 3 and self.dirs != 1:
+            self.dirs = 3
+        elif action == 1 and self.dirs != 3:
+            self.dirs = 1
+        dirs = self.dirs
+        self.move_snake(dirs)
