@@ -63,3 +63,10 @@ class Game(object):
         if apple_eaten:
             reward = 1.0
         return reward
+
+    def die(self):
+        reward = -1
+        self.draw_board()
+        image = pygame.surfarray.array3d(pygame.display.get_surface())
+        time.sleep(1 / 10)
+        return image, reward, True
