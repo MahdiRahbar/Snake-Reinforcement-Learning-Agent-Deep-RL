@@ -83,3 +83,13 @@ class Game(object):
             self.dirs = 1
         dirs = self.dirs
         self.move_snake(dirs)
+
+    def move_snake(self, dirs):
+        if dirs == 0:
+            self.ys[0] += self.speed
+        elif dirs == 1:
+            self.xs[0] += self.speed
+        elif dirs == 2:
+            self.ys[0] -= self.speed
+        elif dirs == 3:
+            self.xs[0] -= self.speed
