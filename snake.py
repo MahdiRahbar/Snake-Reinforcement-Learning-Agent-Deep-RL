@@ -93,3 +93,22 @@ class Game(object):
             self.ys[0] -= self.speed
         elif dirs == 3:
             self.xs[0] -= self.speed
+
+    def draw_board(self):
+        self.s.fill((255, 255, 255))
+        for i in range(0, len(self.xs)):
+            self.s.blit(self.img, (self.xs[i], self.ys[i]))
+        self.s.blit(self.appleimage, self.applepos)
+        pygame.draw.rect(self.s, (0, 0, 0), [0, 0, self.width, self.border_width])
+        pygame.draw.rect(
+            self.s,
+            (0, 0, 0),
+            [0, self.height - self.border_width, self.width, self.border_width],
+        )
+        pygame.draw.rect(self.s, (0, 0, 0), [0, 0, self.border_width, self.height])
+        pygame.draw.rect(
+            self.s,
+            (0, 0, 0),
+            [self.width - self.border_width, 0, self.border_width, self.height],
+        )
+        pygame.display.update()
