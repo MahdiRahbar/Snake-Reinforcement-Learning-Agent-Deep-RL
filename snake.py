@@ -139,3 +139,29 @@ class Game(object):
             ):
                 return self.die()
             i -= 1
+
+        # Check if snake collide with apple
+        if self.collide(
+            self.xs[0],
+            self.applepos[0],
+            self.ys[0],
+            self.applepos[1],
+            self.snake_size,
+            self.food_size,
+            self.snake_size,
+            self.food_size,
+        ):
+            self.score += 1
+            self.xs.append(700)
+            self.ys.append(700)
+            self.applepos = (
+                random.randint(
+                    self.border_width + self.food_size,
+                    self.height - self.food_size - self.border_width,
+                ),
+                random.randint(
+                    self.border_width + self.food_size,
+                    self.width - self.food_size - self.border_width,
+                ),
+            )
+            snake_eat_apple = True
