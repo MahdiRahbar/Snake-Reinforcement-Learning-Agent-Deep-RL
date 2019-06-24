@@ -112,3 +112,29 @@ class Game(object):
             [self.width - self.border_width, 0, self.border_width, self.height],
         )
         pygame.display.update()
+
+    def run(self, actions):
+        actions = actions
+        i = len(self.xs) - 1
+        pygame.event.pump()
+        snake_eat_apple = False
+        self.direction_snake(actions)
+        while i >= 1:
+            self.xs[i] = self.xs[i - 1]
+            self.ys[i] = self.ys[i - 1]
+            i -= 1
+        i = len(self.xs) - 1
+        # Check if snake collide with self
+        while i >= 2:
+            if self.collide(
+                self.xs[0],
+                self.xs[i],
+                self.ys[0],
+                self.ys[i],
+                self.snake_size,
+                self.snake_size,
+                self.snake_size,
+                self.snake_size,
+            ):
+                return self.die()
+            i -= 1
