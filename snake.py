@@ -165,3 +165,22 @@ class Game(object):
                 ),
             )
             snake_eat_apple = True
+
+        # Check if snake collide with wall
+        if (
+            self.xs[0] < self.border_width / 2
+            or self.xs[0] > self.width - self.snake_size - self.border_width / 2
+            or self.ys[0] < self.border_width / 2
+            or self.ys[0] > self.height - self.snake_size - self.border_width / 2
+        ):
+            return self.die()
+
+        # Calculate new distance between snake head and food
+        self.old_distance = self.new_distance
+        self.new_distance = self.distance(
+            self.xs[0], self.applepos[0], self.ys[0], self.applepos[1]
+        )
+        self.draw_board()
+        time.sleep(1 / 20)
+        image = pygame.surfarray.array3d(pygame.display.get_surface())
+        return image, self.reward(snake_eat_apple), self.game_over
