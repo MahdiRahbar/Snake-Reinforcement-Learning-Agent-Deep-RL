@@ -135,6 +135,7 @@ class Game(object):
                 self.snake_size,
                 self.snake_size,
                 self.snake_size,
+                    # Check the loop condition for the Bug!
             ):
                 return self.die()
             i -= 1
