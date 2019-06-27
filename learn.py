@@ -33,7 +33,7 @@ def build_model():
     model.add(Dense(256))
     model.add(Dense(NB_ACTIONS))
 
-    # I chosed to use a Adam optimizer, I have used it before with good results
+    # Adam optimizer
     adam = Adam(lr=LEARNING_RATE)
     model.compile(loss="mean_squared_error", optimizer=adam)
     print(model.summary())
