@@ -20,3 +20,21 @@ FINAL_EPSILON = 0.3
 LEARNING_RATE = 1e-4
 GAMMA = 0.7
 NB_FRAMES = 1
+
+
+def build_model():
+    model = Sequential()
+
+    model.add(Convolution2D(16, (8, 8), strides=(4, 4), input_shape=INPUT_SHAPE))
+    model.add(Activation("relu"))
+    model.add(Convolution2D(32, (4, 4), strides=(2, 2)))
+    model.add(Activation("relu"))
+    model.add(Flatten())
+    model.add(Dense(256))
+    model.add(Dense(NB_ACTIONS))
+
+    # I chosed to use a Adam optimizer, I have used it before with good results
+    adam = Adam(lr=LEARNING_RATE)
+    model.compile(loss="mean_squared_error", optimizer=adam)
+    print(model.summary())
+    return model
