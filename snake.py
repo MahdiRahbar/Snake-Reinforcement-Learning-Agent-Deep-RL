@@ -5,6 +5,7 @@ import math
 
 
 class Game(object):
+    EPISODE = 0
     def __init__(self):
         pygame.init()
         self.height = 400
@@ -13,6 +14,7 @@ class Game(object):
         self.s = pygame.display.set_mode((self.height, self.width))
         self.speed = 20
         self.set_start_state()
+        
 
     def set_start_state(self):
         self.snake_size = 20
@@ -31,7 +33,7 @@ class Game(object):
         ]
         self.dirs = random.choice([0, 1, 2, 3])
         self.score = 0
-        self.applepos = (
+        self.applepos = (  # Initializing apple's place
             random.randint(
                 self.border_width + self.food_size,
                 self.height - self.food_size - self.border_width,
@@ -42,12 +44,24 @@ class Game(object):
             ),
         )
         self.appleimage = pygame.Surface((self.food_size, self.food_size))
-        self.appleimage.fill((0, 255, 0))
+        self.appleimage.fill((255, 0, 0))  # to make the apple Red ! :)))
         self.img = pygame.Surface((self.food_size, self.food_size))
         self.img.fill((0, 0, 0))
         self.game_over = False
         self.new_distance = 0
         self.old_distance = 0
+
+        Game.EPISODE+=1
+        print("\n\n--------------------------------")
+        print(" Episode ", Game.EPISODE)
+        print("--------------------------------")
+
+
+    def distance(self, x1, x2, y1, y2):
+        x = math.pow((x1 - x2), 2)
+        y = math.pow((y1 - y2), 2)
+        distance = math.sqrt(x + y)
+        return distance
 
     def collide(self, x1, x2, y1, y2, w1, w2, h1, h2):
         if x1 + w1 > x2 and x1 < x2 + w2 and y1 + h1 > y2 and y1 < y2 + h2:
@@ -70,7 +84,7 @@ class Game(object):
         image = pygame.surfarray.array3d(pygame.display.get_surface())
         time.sleep(1 / 10)
         return image, reward, True
-        
+
     def direction_snake(self, actions):
         action = actions
         if action == 2 and self.dirs != 0:
@@ -119,6 +133,9 @@ class Game(object):
         pygame.event.pump()
         snake_eat_apple = False
         self.direction_snake(actions)
+
+
+
         while i >= 1:
             self.xs[i] = self.xs[i - 1]
             self.ys[i] = self.ys[i - 1]
@@ -135,7 +152,6 @@ class Game(object):
                 self.snake_size,
                 self.snake_size,
                 self.snake_size,
-                    # Check the loop condition for the Bug!
             ):
                 return self.die()
             i -= 1
@@ -152,6 +168,7 @@ class Game(object):
             self.food_size,
         ):
             self.score += 1
+            print ("Got an apple! The score is : ", self.score)
             self.xs.append(700)
             self.ys.append(700)
             self.applepos = (
