@@ -20,3 +20,37 @@ FINAL_EPSILON = 0.3
 LEARNING_RATE = 1e-4
 GAMMA = 0.7
 NB_FRAMES = 1
+
+
+
+def build_model():
+    model = Sequential()
+
+    model.add(Convolution2D(16, (8, 8), strides=(4, 4), input_shape=INPUT_SHAPE))
+    model.add(Activation("relu"))
+    model.add(Convolution2D(32, (4, 4), strides=(4, 4)))
+    model.add(Activation("relu"))
+    model.add(Convolution2D(64, (4, 4), strides=(2, 2)))
+    model.add(Activation("relu"))
+
+    model.add(Flatten())
+
+    # Multi-layer perceptron
+    model.add(Dense(1024))
+    model.add(Activation("relu"))
+    model.add(Dense(512))
+    model.add(Activation("relu"))
+    model.add(Dense(256))
+    model.add(Activation("relu"))
+    model.add(Dense(128))
+    model.add(Activation("relu"))
+    model.add(Dense(64))
+    model.add(Activation("relu"))
+    
+    model.add(Dense(NB_ACTIONS))
+
+    # Compling the model
+    adam = Adam(lr=LEARNING_RATE)
+    model.compile(loss="mean_squared_error", optimizer=adam)
+    print(model.summary())
+    return model
