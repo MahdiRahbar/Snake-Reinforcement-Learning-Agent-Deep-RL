@@ -65,3 +65,11 @@ def experience_replay(batch_size):
             yield rsample(memory, batch_size) if batch_size <= len(memory) else None
         )
         memory.append(experience)
+
+def stack_image(game_image):
+    x_t = skimage.color.rgb2gray(game_image)    # Make image black and white
+    x_t = skimage.transform.resize(x_t, (80, 80))    # Resize the image to 80x80 pixels
+    x_t = skimage.exposure.rescale_intensity(x_t, out_range=(0, 255))    # Change the intensity of colors, maximizing the intensities.
+    s_t = np.stack((x_t, x_t), axis=2)    # Stacking 2 images for the agent to get understanding of speed
+    s_t = s_t.reshape(1, s_t.shape[0], s_t.shape[1], s_t.shape[2])    # Reshape to make keras like it
+    return s_t
