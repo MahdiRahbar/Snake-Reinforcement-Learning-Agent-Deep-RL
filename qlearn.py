@@ -28,10 +28,12 @@ def build_model():
 
     model.add(Convolution2D(16, (8, 8), strides=(4, 4), input_shape=INPUT_SHAPE))
     model.add(Activation("relu"))
-    model.add(Convolution2D(32, (4, 4), strides=(4, 4)))
+    model.add(Convolution2D(32, (4, 4), strides=(2, 2)))  # This layer added instead of the two below layers
     model.add(Activation("relu"))
-    model.add(Convolution2D(64, (4, 4), strides=(2, 2)))
-    model.add(Activation("relu"))
+    # model.add(Convolution2D(32, (4, 4), strides=(4, 4)))
+    # model.add(Activation("relu"))
+    # model.add(Convolution2D(64, (4, 4), strides=(2, 2)))
+    # model.add(Activation("relu"))
 
     model.add(Flatten())
 
@@ -54,3 +56,5 @@ def build_model():
     model.compile(loss="mean_squared_error", optimizer=adam)
     print(model.summary())
     return model
+
+
