@@ -58,3 +58,10 @@ def build_model():
     return model
 
 
+def experience_replay(batch_size):
+    memory = []
+    while True:
+        experience = (
+            yield rsample(memory, batch_size) if batch_size <= len(memory) else None
+        )
+        memory.append(experience)
