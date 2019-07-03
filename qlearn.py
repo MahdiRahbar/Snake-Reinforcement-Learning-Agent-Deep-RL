@@ -130,3 +130,28 @@ def train_network(model):
             # Exploration vs Exploitation
 
         t += 1
+        # save progress every 10000 iterations
+        if t % 100 == 0:
+            print("Now we save model")
+            model.save_weights("model.h5", overwrite=True)
+            with open("model.json", "w") as outfile:
+                json.dump(model.to_json(), outfile)
+
+        if t % 10 == 0:
+            print(
+                "TIMESTEP",
+                t,
+                "/ EPSILON",
+                epsilon,
+                "/ ACTION",
+                action_index,
+                "/ REWARD",
+                r_t,
+                "/ Q_MAX ",
+                np.max(Q_sa),
+                "/ Loss ",
+                loss,
+            )
+
+    print("Episode finished!")
+    print("************************")
