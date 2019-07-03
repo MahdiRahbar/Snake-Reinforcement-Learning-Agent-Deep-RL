@@ -87,3 +87,46 @@ def train_network(model):
     t = 0
     exp_replay = experience_replay(BATCH)
     exp_replay.__next__()  # Start experience replay coroutine
+
+    while True:
+
+        loss = 0
+        Q_sa = 0
+        action_index = 4
+        r_t = 0
+        a_t = "no nothing"
+        if terminal:
+            game_state.set_start_state()
+        if t % NB_FRAMES == 0:
+            if random.random() <= epsilon:
+                action_index = random.randrange(NB_ACTIONS)
+                a_t = GAME_INPUT[action_index]
+            else:
+                action_index = np.argmax(model.predict(s_t))
+                a_t = GAME_INPUT[action_index]
+        if epsilon > FINAL_EPSILON:
+            epsilon = epsilon * EPSILON_DECAY
+        else:
+            epsilon = FINAL_EPSILON
+        # run the selected action and observed next state and reward
+        x_t1_colored, r_t, terminal = game_state.run(a_t)
+        s_t1 = stack_image(x_t1_colored)
+        experience = (s_t, a_t, r_t, s_t1)
+        batch = exp_replay.send(experience)
+        s_t1 = stack_image(x_t1_colored)
+        if batch:
+            inputs = np.zeros((BATCH, s_t.shape[1], s_t.shape[2], s_t.shape[3]))
+            targets = np.zeros((BATCH, NB_ACTIONS))
+            i = 0
+            for s, a, r, s_pred in batch:
+                inputs[i : i + 1] = s
+                if r < 0:
+                    targets[i, a] = r
+                else:
+                    Q_sa = model.predict(s_pred)
+                    targets[i, a] = r + GAMMA * np.max(Q_sa)
+                i += 1
+            loss += model.train_on_batch(inputs, targets)
+            # Exploration vs Exploitation
+
+        t += 1
