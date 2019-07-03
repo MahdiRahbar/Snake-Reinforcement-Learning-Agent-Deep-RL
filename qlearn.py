@@ -155,3 +155,17 @@ def train_network(model):
 
     print("Episode finished!")
     print("************************")
+
+def nn_playGame(model):
+    print("Now we load weight")
+    model.load_weights("model.h5")
+    print("Weight load successfully")
+    print("Let the game begin!")
+    game_state = game.Game()  # Starting up a game
+    game_state.set_start_state()
+    game_image, score, game_lost = game_state.run(
+        4
+    )  # The game is started but no action is performed
+    s_t = stack_image(game_image)
+    s_t1 = s_t
+    a_t = 4
