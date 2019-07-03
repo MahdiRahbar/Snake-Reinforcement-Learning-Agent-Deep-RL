@@ -73,3 +73,17 @@ def stack_image(game_image):
     s_t = np.stack((x_t, x_t), axis=2)    # Stacking 2 images for the agent to get understanding of speed
     s_t = s_t.reshape(1, s_t.shape[0], s_t.shape[1], s_t.shape[2])    # Reshape to make keras like it
     return s_t
+
+def train_network(model):
+
+    epsilon = EPSILON
+    game_state = game.Game()  # Starting up a game
+    game_state.set_start_state()
+    game_image, score, game_lost = game_state.run(
+        0
+    )  # The game is started but no action is performed
+    s_t = stack_image(game_image)
+    terminal = False
+    t = 0
+    exp_replay = experience_replay(BATCH)
+    exp_replay.__next__()  # Start experience replay coroutine
