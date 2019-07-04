@@ -183,3 +183,19 @@ def nn_playGame(model):
         x_t1_colored, _, terminal = game_state.run(a_t)
         s_t1 = stack_image(x_t1_colored)
         game_lost = terminal
+
+
+def playGame(args):
+    model = build_model()
+    if args["mode"] == "Run" or args["mode"] == "run":
+        nn_playGame(model)
+    elif args["mode"] == "Re-train" or args["mode"] == "re-train" or args["mode"] == "retrain":
+        nn_loadOld_weights(model)
+    elif args["mode"] == "Train" or args["mode"] == "train":
+        train_network(model)
+    else:
+        print("*** Not valid argument ***")
+        print("Run argument for running game with a trained weights")
+        print("Re-train argument for continue training model")
+        print("Train to train train from scratch")
+        print("*********************************")
