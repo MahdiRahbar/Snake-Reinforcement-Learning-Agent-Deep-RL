@@ -199,3 +199,18 @@ def playGame(args):
         print("Re-train argument for continue training model")
         print("Train to train train from scratch")
         print("*********************************")
+
+
+def main():
+
+    parser = argparse.ArgumentParser(
+        description="How you would like your program to run"
+    )
+    parser.add_argument("-m", "--mode", help="Train / Run / Re-train", required=True)
+    args = vars(parser.parse_args())
+    playGame(args)
+
+
+
+if __name__ == "__main__":
+    main()
