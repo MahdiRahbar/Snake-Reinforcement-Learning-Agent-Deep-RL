@@ -1,13 +1,13 @@
 # Snake-Reinforcement-Learning-Agent-Deep-RL
 
-## Discription 
-As the repo's name indicates, this is a simple Deep-QLearning Agent that learns how to play the famous snake game! However I believe with some little changes based on other environments it can be adapted to be trained on other games as well. (I have not test yet!) 
-This project was presented as one of the neural network's class of professor [Dr. Mohammad Manthouri](https://www.linkedin.com/in/mohammad-mansouri-07030766/).
+## Description 
+As the repo's name indicates, this is a simple Deep-QLearning Agent that learns how to play the famous snake game! However, I believe with some little changes based on other environments it can be adapted to be trained on other games as well. (I have not tested yet!) 
+This project was presented as one of the neural network's classes of professor [Dr. Mohammad Manthouri](https://www.linkedin.com/in/mohammad-mansouri-07030766/).
 
 ## How to Run?
-First make sure to install following packages : Keras , pygame 
+First make sure to install following packages: Keras, pygame 
 ```
-pip install tensorflow , keras , pygame 
+pip install tensorflow , Keras , pygame 
 ```
 Then you can run the code and train the agent by the following command (Note that it may take several hours for the agent to get to some  acceptable points! So it's all normal!) : 
 ``` 
