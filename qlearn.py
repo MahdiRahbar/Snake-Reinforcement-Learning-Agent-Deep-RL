@@ -16,9 +16,9 @@ BATCH = 100
 GAME_INPUT = [0, 1, 2, 3, 4]
 EPSILON = 1
 EPSILON_DECAY = 0.99
-FINAL_EPSILON = 0.3
+FINAL_EPSILON = 0.1
 LEARNING_RATE = 1e-4
-GAMMA = 0.7
+GAMMA = 0.9
 NB_FRAMES = 1
 
 
@@ -73,6 +73,15 @@ def stack_image(game_image):
     s_t = np.stack((x_t, x_t), axis=2)    # Stacking 2 images for the agent to get understanding of speed
     s_t = s_t.reshape(1, s_t.shape[0], s_t.shape[1], s_t.shape[2])    # Reshape to make keras like it
     return s_t
+
+
+def nn_loadOld_weights(model):
+    print("Now we load weight")
+    model.load_weights("model.h5")
+    print("Weight load successfully")
+    print("Let the training begin!")
+    train_network(model)
+
 
 def train_network(model):
 
