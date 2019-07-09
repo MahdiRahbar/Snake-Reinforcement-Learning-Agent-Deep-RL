@@ -1,7 +1,7 @@
-# Snake-Reinforcement-Learning-Agent-Deep-RL
+# Snake Deep Q-Learning Agent
 
 ## Description 
-As the repo's name indicates, this is a simple Deep-QLearning Agent that learns how to play the famous snake game! However, I believe with some little changes based on other environments it can be adapted to be trained on other games as well. (I have not tested yet!) 
+As the repo's name indicates, this is a simple Deep-QLearning snake Agent that learns how to interact with the famous snake game's environment! However, I believe with some little changes based on other environments it can be adapted to be trained on other games as well. (I have not tested yet!) 
 This project was presented as one of the neural network's classes of professor [Dr. Mohammad Manthouri](https://www.linkedin.com/in/mohammad-mansouri-07030766/).
 
 ## How to Run?
