@@ -30,8 +30,8 @@ def build_model():
     model.add(Activation("relu"))
     model.add(Convolution2D(32, (4, 4), strides=(2, 2)))  # This layer added instead of the two below layers
     model.add(Activation("relu"))
-    # model.add(Convolution2D(32, (4, 4), strides=(4, 4)))
-    # model.add(Activation("relu"))
+    model.add(Convolution2D(32, (3, 3), strides=(1, 1)))
+    model.add(Activation("relu"))
     # model.add(Convolution2D(64, (4, 4), strides=(2, 2)))
     # model.add(Activation("relu"))
 
